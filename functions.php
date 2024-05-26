@@ -106,38 +106,11 @@ function checkUsernamelogin($username, $password){
         
         return false;
     }else{
-        /*
-        echo"<br>";
-            print_r($data);
-            echo"<br>";
-            print_r($data[0]);
-            echo"<br>";
-            print_r($data[0]["reg_date"]);
-            echo"<br>";
-            echo "cas prveho prihlasenia ".$data[0]["reg_date"];*/
-        //porovnat heslo
-       /* echo"<br>";
-        echo "heslo ".$data[0]["password"];
-        $hash= password_hash($password,PASSWORD_DEFAULT);
-        echo"<br>";
-        echo"hashnute heslo ".$hash;
-            
-        password_verify($password,$data[0]["password"] );
-        echo"<br>";*/
         
-
+        
+        //TODO upravit aby bralo aj sol
         if( password_verify($password,$data[0]["password"]) ){
         
-            
-           
-           
-           // $hash2= password_hash($data[0]["password"],PASSWORD_DEFAULT);
-           // 
-            //echo"hashnute heslo2 ".$hash;
-            
-            
-            /*echo"<br>";
-            echo"porovnalo hashnute hesla";*/
 
             return true;
         }
@@ -313,3 +286,21 @@ function generateRandomString() {
 
 // Príklad použitia
 
+function addBlog($blogname,$blogtext){
+    //overit najprv session ci ide
+  if( checkSession()){
+    //session ide
+    echo"<br>". $_SESSION["username"];
+    //sql vlozit
+    $mysql= dbConnect();
+    //prepare
+    $sql = $mysql->prepare("INSERT INTO blogposts ( blog_name, blog_text,id_user) VALUES (?, ?, ?)");
+
+    $sql->bind_param("sss", $blogname, $blogtext, getSessionUser());
+    $sql->execute();
+    
+
+  }
+
+
+}

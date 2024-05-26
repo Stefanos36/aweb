@@ -4,6 +4,8 @@
         require("sessionconfig.php");
         include("header.php");
         headerdb();
+
+        //TODO odkomentovat
        // newpostoverenie();
     ?>
     <!DOCTYPE html>
@@ -30,9 +32,9 @@
                     <form method="post">
                         <div style=" background-color:rgb(23, 30, 39); padding:15px ;border-radius:4px; font-size:larger ;display:flex">
 
-
+                            <!--  required -->
                             Title:
-                            <input style="margin-left: auto; font-weight:bold; " type="text" name="blog_name" required>
+                            <input style="margin-left: auto; font-weight:bold; " type="text" name="blog_name">
                         </div>
                         <br>
 
@@ -42,8 +44,8 @@
                                 Content:
                         </div>
 
-                        <!-- <input type="textarea" style="resize: none; width: 100%; font-size:larger" rows="6"> -->
-                        <textarea name="blog_text" id="" style="resize: none; width: 100%; font-size:larger" rows="6" required></textarea>
+                        <!-- required -->
+                        <textarea name="blog_text" id="" style="resize: none; width: 100%; font-size:larger" rows="6" ></textarea>
                         </div>
                         
                         <input class="button" type="submit" value="odoslat">
@@ -77,13 +79,27 @@
     
             // -||
             echo "<br>".$blogname;
-            if(empty($blogname) ){
+            echo "<br>".strlen($blogname);
+            if(empty($blogname) || strlen($blogname)>40  ){
+                echo "<br> blogname zly vstup ". strlen($blogname);
 
-
-            }elseif(empty($blogtext)){
+            }elseif(empty($blogtext) || strlen($blogtext)>500){
+                echo "<br> blogtext zly vstup ".strlen($blogtext) ;
+            }
+            else{
+                //prepared sequence
+                            
+                            addBlog($blogname,$blogtext);
+                            //poslat ho na novu stranku i quess?
+                            //daco ako header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); 
+                        // blog.php?blogpostname=".urlencode( getBlogposts()[$i]["blog_name"])
+                            
+                        //todo preposlat
+                        echo" ";
+                        header("Location: blog.php?blogpostname=".urlencode($blogname));
 
             }
-            //prepared sequence
+            
 
         }
         ?>

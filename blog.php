@@ -36,9 +36,31 @@
         
         }
         else{
+            //ak nenajde posli ho do prec
+            //alebo vytvorit stranku kde je napisane ze nenaslo?
+
             $blogpostname = false;
-            echo"nenaslo blogpost";
-            header("Location: index.php");
+           // echo"nenaslo blogpost";
+            ?>
+             <div class="marginbasic" style="margin-top:20%">
+            <div class="changea">
+                        <div class="profile" style="display:grid">
+                            <div style=" background-color:rgb(23, 30, 39); padding:15px ;border-radius:4px; font-size:larger">
+                                <h2 style="text-align:center">
+                                <?php 
+                                //echo  getSessionUser();
+                                echo"Post not found 404";
+                                ?></h2>
+                            </div>
+                            
+                            
+                            
+                        </div>  
+                    </div>
+                </div>
+            <?php
+
+            //header("Location: index.php");
             die;
         }
     ?>
