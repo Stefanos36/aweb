@@ -95,6 +95,8 @@ function checkUsername( $username ){
 
 //ak by sa aj podarilo dat neplatny username
 function checkUsernamelogin($username, $password){
+
+
     $mysql= dbConnect();
     $sql = $mysql->prepare("SELECT * FROM users WHERE username= ?");
     $sql->bind_param("s",$username);
@@ -107,9 +109,9 @@ function checkUsernamelogin($username, $password){
         return false;
     }else{
         
-        
+        $salt = zoberSol($username);
         //TODO upravit aby bralo aj sol
-        if( password_verify($password,$data[0]["password"]) ){
+        if( password_verify($password.$salt ,$data[0]["password"]) ){
         
 
             return true;
@@ -130,13 +132,32 @@ function addUser($username, $password){
     if(checkUsername($username)){
         return;
     }
+
     //TODO nerozbijem to zakomentovanim prveho?????
     //$sql = $mysql->prepare("SELECT * FROM users WHERE username= ?");
-    $sql = $mysql->prepare("INSERT INTO users (username, password, reg_date)
-    VALUES (?, ?,NOW())"); //now mi prida sucasny cas
-    $sql->bind_param("ss",$username,$password);
+    $salt = generateRandomString();
+    echo "<br>password <br>".$password;
+    echo "<br>salt  <br>".$salt;
+
+    echo "<br>  ".$password.$salt; //nemozem plusnut
+
+    $hash = password_hash( $password.$salt, PASSWORD_DEFAULT );
+
+    echo "<br>hash:  <br>".strlen($hash) ;
+    echo "<br>hash:  <br>".$hash ;
+    
+
+    //pri logine budem musiet natiahnut este sol
+    $odhashuj = password_verify($password.$salt ,$hash); 
+    echo "<br> ".strlen($odhashuj) ;
+    echo "<br>".$odhashuj ;
+
+    $sql = $mysql->prepare("INSERT INTO users (username, password,salt ,reg_date)
+    VALUES (?, ?,?,NOW())"); //now mi prida sucasny cas
+    $sql->bind_param("sss",$username,$hash, $salt);
     
     //print_r($sql);
+   
     
     if($sql->execute()){
         echo"<br>vykonalo";
@@ -302,5 +323,22 @@ function addBlog($blogname,$blogtext){
 
   }
 
+
+} 
+
+function zoberSol($username){
+    $mysql= dbConnect();
+    
+    $sql = $mysql->prepare("SELECT salt FROM users WHERE username= ?");
+    $sql->bind_param("s",$username);
+    $sql->execute();
+  //  echo"<br>sol" .$sql->get_result();
+   // $result->fetch_all(MYSQLI_ASSOC)
+    //$sql->get_result()
+
+    $result= $sql->get_result();
+    $data=$result->fetch_all(MYSQLI_ASSOC);
+  //  print_r($data[0]['salt']);
+    return $data[0]['salt']; //vrati to asi prazdne ked nebola pridana este sol?
 
 }

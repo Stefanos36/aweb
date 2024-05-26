@@ -27,7 +27,7 @@
         <label class="text">Username</label><br>
         <input class="text" type="text" name="username" maxlength="25" >  <br> <!-- vytvorit neskor decoy-->
         <label class="text">Password</label><br>
-        <input class="text"  type="password" name="password" maxlength="20"  > <br>
+        <input class="text"  type="password" name="password" maxlength="40"  > <br>
         <label class="text">Repeat Password</label><br>
         <input class="text" type="password" name="password2" > <br><br>
         <input  class="button" id="button" type="submit" value="Signup"> <br><br>   <!--//submit spusti ten script?--> 
@@ -62,7 +62,7 @@
             echo "<div class=\"warning\">Zadajte username</div>" ;
            
 
-        }elseif(empty($password) || strlen($password) > 20){
+        }elseif(empty($password) || strlen($password) > 40){
             echo "<div class=\"warning\">Zadajte heslo</div>" ;
             
 
@@ -82,10 +82,10 @@
                 //upravit a zasolit este heslo https://en.wikipedia.org/wiki/Salt_(cryptography)
 
                 //mozem ho pridat
-                $hash = password_hash( $password, PASSWORD_DEFAULT );
+               // $hash = password_hash( $password, PASSWORD_DEFAULT );
                
-                addUser($username, $hash);
-                header("Location: login.php");
+                addUser($username, $password);
+               // header("Location: login.php");
 
             }
         }

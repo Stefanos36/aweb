@@ -28,7 +28,7 @@
 
     <?php 
     //checkSession()
-    if(true){
+    if(checkSession()){
     
         ?>
         <div class="changea">

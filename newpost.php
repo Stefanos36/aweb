@@ -5,8 +5,8 @@
         include("header.php");
         headerdb();
 
-        //TODO odkomentovat
-       // newpostoverenie();
+       
+        newpostoverenie();
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -65,9 +65,9 @@
         {
 
             //<script>alert('XSS útok!');</script>
-            echo"<br>";
-            echo"poslal";
-            $test = $_POST['blog_name']; ///napady, preposlat na inu stranku co si ulozi do session ci nebol pokus o script?
+            //echo"<br>";
+           // echo"poslal";
+          //  $test = $_POST['blog_name']; ///napady, preposlat na inu stranku co si ulozi do session ci nebol pokus o script?
             //z tadial vykona kod co neumozni inam sa dostat?
             //echo"<br> ".$test;
             
@@ -94,8 +94,8 @@
                             //daco ako header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); 
                         // blog.php?blogpostname=".urlencode( getBlogposts()[$i]["blog_name"])
                             
-                        //todo preposlat
-                        echo" ";
+                       
+                     
                         header("Location: blog.php?blogpostname=".urlencode($blogname));
 
             }

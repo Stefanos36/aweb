@@ -42,7 +42,7 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
 
         <input  class="text" type="text" name="username" maxlength="25">  <br> <!-- vytvorit neskor decoy-->
         <label class="text">Password</label><br>
-        <input  class="text" type="password" name="password" maxlength="20"> <br><br>
+        <input  class="text" type="password" name="password" maxlength="40"> <br><br>
         <input class="button" id="button" type="submit" value="Login"> <br><br>
 
         <a class ="underline-hover" href="signup.php">Click to Signup/Stlac pre Registraciu</a>
@@ -64,18 +64,25 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
 		
         $username = filter_input(INPUT_POST,"username",FILTER_SANITIZE_SPECIAL_CHARS); //aby nam nepreposlali script do toho
         $password = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS); //aby nam nepreposlali script do toho
+       // $password = $_POST["password"];
+
 
 
         if(empty($username) || strlen($username) > 25){
             echo "<div class=\"warning\">Zadajte username</div>" ;
             
 
-        }elseif(empty($password) || strlen($password) > 20){
+        }elseif(empty($password) || strlen($password) > 40){
             echo "<div class=\"warning\">Zadajte heslo</div>" ;
             
 
         }else{
-            $hash= password_hash($password,PASSWORD_DEFAULT);
+
+            //funkcia na vytiahnutie soli
+
+            
+
+           // $hash= password_hash($password.$salt,PASSWORD_DEFAULT);
          
             if(!checkUsername($username) ){
                 echo "<div class=\"warning\">Neplatny username</div>" ;
@@ -103,7 +110,7 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
                     $_SESSION["password"]= $password; 
 
 
-                    header("Location: index.php"); //TODO nefunguje na live??
+                    header("Location: index.php");
                     //obist to pouzitim js ?
 
 
