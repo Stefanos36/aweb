@@ -130,7 +130,8 @@
                 
                 <label for="comment">Komentár:</label><br>
                 <!-- rows="4" cols="50" -->
-                <textarea id="comment" name="comment"  rows="3" required maxlength="200" class="textarea "  style="width:100%"></textarea><br>
+                <!--  -->
+                <textarea id="comment" name="comment"  rows="3"  class="textarea "  style="width:100%" required maxlength="200"></textarea><br>
                 <input class="button" type="submit" value="Odoslať">
             </form>
 
@@ -142,40 +143,46 @@
                     $comment = filter_input(INPUT_POST,"comment",FILTER_SANITIZE_SPECIAL_CHARS);
                     echo $comment."<br>";
 
-
-                    if(checkSession()){
-
-                        echo $_SESSION["username"]." <br>";
-                        $blogpostname = urldecode($_GET['blogpostname']);
-                        echo '<br>'.$blogpostname.'<br>';
-
-
-                        $idblog=  getBlogpostByblogpostname($blogpostname)[0]["id_blog"];
-                        echo "<br>".$idblog. "<br>";
-                        addcommentLog($comment, $_SESSION["username"] , $idblog );
-                        
-                        echo "<br> url ".urldecode($_GET['blogpostname']);
-                        echo "<br> url ".urlencode($_GET['blogpostname']);
-
-                        //TODO docasne zakomentovane
-                        header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); // v takomto stve treba to dat 
-                      //  header("Location: ".$_SERVER['PHP_SELF']);
-                        exit(); 
+                    if(empty($comment) || strlen($comment)  > 25){
+                        echo "neplatne". strlen($comment)  ;
                     }else{
-                        
-                        echo '<br>neprihlásený';
-                        $blogpostname = urldecode($_GET['blogpostname']);
-                        echo '<br>blogname: '.$blogpostname;
-                        $idblog=  getBlogpostByblogpostname($blogpostname)[0]["id_blog"];
-                        echo "<br>idblog: ".$idblog. "<br>";
 
-                        addcommentLog($comment,null , $idblog );
-                        header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); 
-                        //header("Location: ".$_SERVER['PHP_SELF']);
-                        
-                        exit(); 
-                    }
+
                   
+
+                        if(checkSession()){
+
+                            echo $_SESSION["username"]." <br>";
+                            $blogpostname = urldecode($_GET['blogpostname']);
+                            echo '<br>'.$blogpostname.'<br>';
+
+
+                            $idblog=  getBlogpostByblogpostname($blogpostname)[0]["id_blog"];
+                            echo "<br>".$idblog. "<br>";
+                            addcommentLog($comment, $_SESSION["username"] , $idblog );
+                            
+                            echo "<br> url ".urldecode($_GET['blogpostname']);
+                            echo "<br> url ".urlencode($_GET['blogpostname']);
+
+                            //TODO docasne zakomentovane
+                            header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); // v takomto stve treba to dat 
+                        //  header("Location: ".$_SERVER['PHP_SELF']);
+                            exit(); 
+                        }else{
+                            
+                            echo '<br>neprihlásený';
+                            $blogpostname = urldecode($_GET['blogpostname']);
+                            echo '<br>blogname: '.$blogpostname;
+                            $idblog=  getBlogpostByblogpostname($blogpostname)[0]["id_blog"];
+                            echo "<br>idblog: ".$idblog. "<br>";
+
+                            addcommentLog($comment,null , $idblog );
+                            header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); 
+                            //header("Location: ".$_SERVER['PHP_SELF']);
+                            
+                            exit(); 
+                        }
+                    }
 
                 }
             ?>

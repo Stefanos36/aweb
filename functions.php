@@ -291,3 +291,25 @@ function newpostoverenie(){
     header("Location: index.php");
    } 
 }
+
+
+
+function generateRandomString() {
+    $Length = 16;
+   // $minLength = 16;
+   // $maxLength = 25;
+    // Povolíme všetky alfanumerické znaky a špeciálne znaky
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_=+[]{}|;:",.<>?/`~';
+    $charactersLength = strlen($characters);
+   // $randomLength = rand($minLength, $maxLength);
+    $randomString = '';
+
+    for ($i = 0; $i < $Length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+
+    return $randomString;
+}
+
+// Príklad použitia
+

@@ -23,7 +23,7 @@
         <div class="marginbasic">
 
 
-       
+        
             <div class="changea">
                 <div class="profile" >
 
@@ -32,7 +32,7 @@
 
 
                             Title:
-                            <input style="margin-left: auto; font-weight:bold; " type="text">
+                            <input style="margin-left: auto; font-weight:bold; " type="text" name="blog_name" required>
                         </div>
                         <br>
 
@@ -43,17 +43,49 @@
                         </div>
 
                         <!-- <input type="textarea" style="resize: none; width: 100%; font-size:larger" rows="6"> -->
-                        <textarea name="" id="" style="resize: none; width: 100%; font-size:larger" rows="6"></textarea>
+                        <textarea name="blog_text" id="" style="resize: none; width: 100%; font-size:larger" rows="6" required></textarea>
                         </div>
                         
-                        <input class="button" type="button" value="odoslat">
+                        <input class="button" type="submit" value="odoslat">
+
+                        <div id="" style="color:red"> color test</div>
                     </form>
                 </div>
             </div>
         </div>  
             
         <?php 
+        echo  "<br>random string ".generateRandomString();
         
+    
+
+        if($_SERVER['REQUEST_METHOD'] == "POST") 
+        {
+
+            //<script>alert('XSS útok!');</script>
+            echo"<br>";
+            echo"poslal";
+            $test = $_POST['blog_name']; ///napady, preposlat na inu stranku co si ulozi do session ci nebol pokus o script?
+            //z tadial vykona kod co neumozni inam sa dostat?
+            //echo"<br> ".$test;
+            
+            // sanitizovat vstup
+
+            $blogname = filter_input(INPUT_POST,"blog_name",FILTER_SANITIZE_SPECIAL_CHARS); //aby nam nepreposlali script do toho
+            $blogtext = filter_input(INPUT_POST,"blog_text",FILTER_SANITIZE_SPECIAL_CHARS); //aby nam nepreposlali script do toho
+           // $password2= filter_input(INPUT_POST,"password2",FILTER_SANITIZE_SPECIAL_CHARS);
+    
+            // -||
+            echo "<br>".$blogname;
+            if(empty($blogname) ){
+
+
+            }elseif(empty($blogtext)){
+
+            }
+            //prepared sequence
+
+        }
         ?>
 
          

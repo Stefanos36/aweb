@@ -40,9 +40,9 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
         <!-- <label for="">Username</label><br> -->
         <label class="text">Username</label><br>
 
-        <input  class="text" type="text" name="username">  <br> <!-- vytvorit neskor decoy-->
+        <input  class="text" type="text" name="username" maxlength="25">  <br> <!-- vytvorit neskor decoy-->
         <label class="text">Password</label><br>
-        <input  class="text" type="password" name="password"> <br><br>
+        <input  class="text" type="password" name="password" maxlength="20"> <br><br>
         <input class="button" id="button" type="submit" value="Login"> <br><br>
 
         <a class ="underline-hover" href="signup.php">Click to Signup/Stlac pre Registraciu</a>
@@ -66,18 +66,18 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
         $password = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS); //aby nam nepreposlali script do toho
 
 
-        if(empty($username) ){
+        if(empty($username) || strlen($username) > 25){
             echo "<div class=\"warning\">Zadajte username</div>" ;
             
 
-        }elseif(empty($password)){
+        }elseif(empty($password) || strlen($password) > 20){
             echo "<div class=\"warning\">Zadajte heslo</div>" ;
             
 
         }else{
             $hash= password_hash($password,PASSWORD_DEFAULT);
          
-            if(!checkUsername($username)){
+            if(!checkUsername($username) ){
                 echo "<div class=\"warning\">Neplatny username</div>" ;
                
 

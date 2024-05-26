@@ -25,9 +25,9 @@
         <!-- <div style="font-size: 20px; margin: 10px; color: white;">Signup/Registracia</div> -->
         <h2>Signup/Registracia</h2>
         <label class="text">Username</label><br>
-        <input class="text" type="text" name="username" >  <br> <!-- vytvorit neskor decoy-->
+        <input class="text" type="text" name="username" maxlength="25" >  <br> <!-- vytvorit neskor decoy-->
         <label class="text">Password</label><br>
-        <input class="text"  type="password" name="password" > <br>
+        <input class="text"  type="password" name="password" maxlength="20"  > <br>
         <label class="text">Repeat Password</label><br>
         <input class="text" type="password" name="password2" > <br><br>
         <input  class="button" id="button" type="submit" value="Signup"> <br><br>   <!--//submit spusti ten script?--> 
@@ -48,14 +48,21 @@
 
        // echo"<br>".$username."<br>".$password."<br>".$password2;
         
-        
+        // if( isset($username)  ){
+        //     echo strlen($username);
+        //     if( $username < 26 ){
+        //      echo   "<div class=\"warning\">Username cant exceed 25 charactes</div>";
 
-        if(empty($username) ){
+        //     }
+        // }
+
+        //nepusti dalej ak je viacej
+        if(empty($username) || strlen($username) > 25 ){
           
             echo "<div class=\"warning\">Zadajte username</div>" ;
            
 
-        }elseif(empty($password)){
+        }elseif(empty($password) || strlen($password) > 20){
             echo "<div class=\"warning\">Zadajte heslo</div>" ;
             
 
@@ -70,6 +77,9 @@
                 echo "<div class=\"warning\">Username je obsadeny, zvolte iny</div>" ;
             }else{
                 echo "Username nie je obsadeny - good <br>";
+
+
+                //upravit a zasolit este heslo https://en.wikipedia.org/wiki/Salt_(cryptography)
 
                 //mozem ho pridat
                 $hash = password_hash( $password, PASSWORD_DEFAULT );
