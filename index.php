@@ -35,7 +35,7 @@
             <div class="profile" style="display:flex">
                 <div style=" background-color:rgb(23, 30, 39); padding:15px ;border-radius:4px; font-size:larger">
                     <?php 
-                    echo  getSessionUser();
+                    echo  prefiltruj (getSessionUser());
                    
                     ?>
                 </div>
@@ -81,7 +81,7 @@
 
         // echo  "<div style>";
         // echo "<h2>";
-        echo"".getBlogposts()[$i]["blog_name"] ;
+        echo"".prefiltruj( getBlogposts()[$i]["blog_name"]) ;
         
         echo "</h2>"; 
         echo  "</div>";
@@ -98,7 +98,7 @@
         echo  "</div>";
         echo  "</div>";
         echo  "</div>";
-        echo"".getBlogposts()[$i]["blog_text"] ."<br>";
+        echo"".prefiltruj( getBlogposts()[$i]["blog_text"]) ."<br>";
         echo "</div>";
         echo"</div>";
         echo "</a>"; //posle nam do url data

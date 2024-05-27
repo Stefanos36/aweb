@@ -24,7 +24,7 @@ grid-template-colums:auto ;
 }
 
 .marginbasic{
-  margin: 10px 5%  ; 
+  margin: 10px 20%  ; 
 }
 
 .marginheader{
@@ -206,7 +206,7 @@ p{
   
  border-radius: 10px ;
   background-color: #0b415a;
-  margin: 10px 5%  ;
+  margin: 10px 20%  ;
   padding: 10px;
   font-size: medium;
 }
@@ -348,7 +348,10 @@ body {
 }
 
 
-  
+.checkform{
+  display: inline;
+
+}
 
 .odsekzhora{
  padding: 30px;
@@ -391,6 +394,18 @@ text-decoration: none;
   
 }
 
+@media screen and (max-width: 900px) {
+
+.marginbasic{
+    margin: 10px 5%  ; 
+  }
+  .blogpost{
+
+    margin: 10px 5%  ; 
+  }
+
+}
+
 
 
 @media screen and (max-width: 500px) {
@@ -429,7 +444,11 @@ text-decoration: none;
   .webhide{
     display: none;
   }
+  
 
 }
+
+
+
 
 

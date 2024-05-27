@@ -241,17 +241,17 @@ function addcommentLog($comment, $username, $id_blog  ){
     //najdi cloveka v sql databaze, zisti jeho id
     //ci je dobry vstup
     if(checkUsername($username)){
-        print_r(getUserbyName($username));
-        echo"<br>";
-        echo "get ". getUserbyName($username)[0]["id"];
+       // print_r(getUserbyName($username));
+       // echo"<br>";
+       // echo "get ". getUserbyName($username)[0]["id"];
         $usernameID = getUserbyName($username)[0]["id"];
-        echo "iduzivatela ".$usernameID;
+        //echo "iduzivatela ".$usernameID;
         //cislo pre blogpost
 
         // $sql = $mysql->prepare("INSERT INTO blogposts (id_user, id_blog, comment, comment_date )
         // VALUES (?, ? ,? , NOW()");
         // $sql->bind_param("sss",$usernameID, $id_blog, $comment);
-        echo "<br>usernameId: ".$username." ".$id_blog." ".$comment;
+      //  echo "<br>usernameId: ".$username." ".$id_blog." ".$comment;
 
         //TODO najst chyb
         $sql = $mysql->prepare("INSERT INTO comments (id_user, id_blog, comment) VALUES (?, ? ,? )");
@@ -261,10 +261,10 @@ function addcommentLog($comment, $username, $id_blog  ){
         $sql->execute();
 
     }else{
-        echo"<br>addcommentLog";
+       /* echo"<br>addcommentLog";
         echo"<br>vstup je null";
         echo"<br>idblog ".$id_blog;
-        echo"<br>comment ".$comment;
+        echo"<br>comment ".$comment;*/
 
         $sql = $mysql->prepare("INSERT INTO comments ( id_blog, comment) VALUES ( ? ,? )");
         $sql->bind_param("ss", $id_blog, $comment);
@@ -377,4 +377,19 @@ function overgetBlog($getblogpost){
     }
 
     return false;
+}
+
+
+
+function get_client_ip() {
+    $ipaddress = '';
+    if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR']) {
+        
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif (isset($_SERVER['HTTP_CLIENT_IP']) && $_SERVER['HTTP_CLIENT_IP']) {
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    } else {
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ipaddress;
 }

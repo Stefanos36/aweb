@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="bootstrap-icons.css">
         <link rel="stylesheet" href="logincss.css">
+        <script src="script.js"></script>
 
  </head>
  <body>
@@ -27,22 +28,16 @@
         <label class="text">Username</label><br>
         <input class="text" type="text" name="username" maxlength="25" >  <br> 
        
-        <!-- vytvorit neskor decoy-->
-        <div class="confirm" id="myForm">
-            <label class="text">Real name</label>
-            <input class="text" type="text" name="name"  >
+        <!-- vytvorit neskor decoy , checkform  upravit pre testovanie-->
+        <div class="checkform" id="myForm">
+            <label class="text">First name</label>
+            <input class="text" type="text" name="firstname"  >
             <br>
         </div>
         <script>
-             window.onload = function() {
-            var honeypot = document.createElement('input');
-            honeypot.type = 'text';
-            honeypot.name = 'forename';
-            honeypot.className= 'text';
-            // honeypot.style.display = 'none';
-            document.getElementById('myForm').appendChild(honeypot);
-            }
-
+           
+            registraionformular();
+          
         </script>
 
         <label class="text">Password</label><br>
@@ -73,7 +68,7 @@
         echo"name ".$name."<br>forename ".$forename;
        
 
-
+        echo"ip adresa?".get_client_ip();
 
 
 

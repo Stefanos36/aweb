@@ -7,14 +7,7 @@
 
 <?php 
 
-    if(isset($_GET['blogpostname'])){ //ci dostaneme $_get z tochto?
-        $blogpostname = $_GET['blogpostname'];
-        
-        $blogpostname =    filter_input(INPUT_GET, "blogpostname", FILTER_SANITIZE_SPECIAL_CHARS);
-     
-        echo"<title>Blog:". $blogpostname."</title>";
-
-    }
+    
 ?>
   
    <!-- <title>Blog: </title> -->
@@ -27,7 +20,15 @@
     require("functions.php");
     require("sessionconfig.php");
     include("header.php");
-   
+
+   if(isset($_GET['blogpostname'])){ //ci dostaneme $_get z tochto?
+        $blogpostname = $_GET['blogpostname'];
+        
+        $blogpostname =    filter_input(INPUT_GET, "blogpostname", FILTER_SANITIZE_SPECIAL_CHARS);
+     
+        echo"<title>Blog:".  prefiltruj( $blogpostname)."</title>";
+
+    }
 ?>
  
 </head>
@@ -44,7 +45,7 @@
             //alebo vytvorit stranku kde je napisane ze nenaslo?
 
             $blogpostname = false;
-           // echo"nenaslo blogpost";
+          
             ?>
              <div class="marginbasic" style="margin-top:20%">
             <div class="changea">
@@ -76,7 +77,7 @@
 
                 <div style="display: flex"> 
 
-                <h2> <?php echo getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['blog_name'] ;  ?> </h2>
+                <h2> <?php echo  prefiltruj( getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['blog_name'] );  ?> </h2>
                 <?php 
                 echo  "<div class=\"casBlogu\" style= \"margin-left: auto;
                 align-content: center\" >";
@@ -89,7 +90,7 @@
                 echo  "</div> </div>";
                 ?>
 
-            <p> <?php echo getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['blog_text'] ;?></p>
+            <p> <?php echo  prefiltruj( getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['blog_text']) ;?></p>
            </div>
              <div class="comments">
                 <h3>Komentáre <i class="bi bi-chat-dots"></i>
@@ -100,7 +101,7 @@
                         echo" <div class=\"comment\" >";
                         
                         echo "<strong>";
-                        $comment = getComments(getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'])[$i];
+                        $comment =  getComments(getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'])[$i];
                         if(empty($comment['id_user'])){
                             echo"Anon";
                         }else{
@@ -108,7 +109,7 @@
                             echo"<div class=\"bi bi-book-half\" > ";
                             //echo getComments(getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'])[$i]['id_user'];
                            // echo $userID."  ";
-                            print_r(getUserbyId($userID)[0]["username"]);
+                            print_r(  prefiltruj(getUserbyId($userID)[0]["username"]));
                             echo "</div>";
                         }
                         echo "</strong>";
@@ -122,7 +123,7 @@
                        // print_r($comment['id_comment']);
                         echo "<div class=\"word-break\" id=c".$comment['id_comment']." >";
 
-                        echo $comment['comment'];
+                        echo  prefiltruj($comment['comment']);
                         
                         //print_r($comment['comment']) ;
                         echo "</div>";
@@ -131,7 +132,7 @@
                         echo "<div class=\"subforum-info subforum-column\">";
                         echo "<small> <i class=\"bi bi-clock\"></i>
                         ";
-                        echo  date( "H:i d.m.Y",strtotime( $comment['comment_date']  )) ;
+                        echo  date( "H:i d.m.Y",  prefiltruj(strtotime( $comment['comment_date'] ) )) ;
                         echo "</small>";
 
                         echo" </div>";
@@ -176,43 +177,46 @@
                 {  
                     
                     $comment = filter_input(INPUT_POST,"comment",FILTER_SANITIZE_SPECIAL_CHARS);
-                    echo $comment."<br>";
+                  //  echo $comment."<br>";
 
                     if(empty($comment) || strlen($comment)  > 200){
                         echo "TODO odkomentovat neplatne". strlen($comment)  ;
+
                     }else{
 
 
 
                         if(checkSession()){
 
-                            echo $_SESSION["username"]." <br>";
+                           // echo   $_SESSION["username"]." <br>";
                             $blogpostname = urldecode($_GET['blogpostname']);
-                            echo '<br>'.$blogpostname.'<br>';
+                           // echo '<br>'.  prefiltruj($blogpostname).'<br>';
 
 
                             $idblog=  getBlogpostByblogpostname($blogpostname)[0]["id_blog"];
-                            echo "<br>".$idblog. "<br>";
+                          //  echo "<br>".$idblog. "<br>";
                             addcommentLog($comment, $_SESSION["username"] , $idblog );
                             
-                            echo "<br> url ".urldecode($_GET['blogpostname']);
-                            echo "<br> url ".urlencode($_GET['blogpostname']);
+                            //echo "<br> url ".urldecode($_GET['blogpostname']);
+                          //  echo "<br> url ".urlencode($_GET['blogpostname']);
 
                             //TODO docasne zakomentovane
                             header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); // v takomto stve treba to dat 
-                        //  header("Location: ".$_SERVER['PHP_SELF']);
+                        
                             exit(); 
                         }else{
                             
-                            echo '<br>neprihlásený';
+                          //  echo '<br>neprihlásený';
                             $blogpostname = urldecode($_GET['blogpostname']);
-                            echo '<br>blogname: '.$blogpostname;
+                           // echo '<br>blogname: '.$blogpostname;
                             $idblog=  getBlogpostByblogpostname($blogpostname)[0]["id_blog"];
-                            echo "<br>idblog: ".$idblog. "<br>";
+                          //  echo "<br>idblog: ".$idblog. "<br>";
 
                             addcommentLog($comment,null , $idblog );
+
                             header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); 
-                            //header("Location: ".$_SERVER['PHP_SELF']);
+
+                            
                             
                             exit(); 
                         }
