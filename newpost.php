@@ -20,12 +20,9 @@
     </head>
     <body>
         <!-- create new post -->
-        
-
+    
         <div class="marginbasic">
 
-
-        
             <div class="changea">
                 <div class="profile" >
 

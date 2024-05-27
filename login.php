@@ -69,11 +69,11 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
 
 
         if(empty($username) || strlen($username) > 25){
-            echo "<div class=\"warning\">Zadajte username</div>" ;
+            echo "<div class=\"warning\">Enter username, max 25 characters </div>" ;
             
 
         }elseif(empty($password) || strlen($password) > 40){
-            echo "<div class=\"warning\">Zadajte heslo</div>" ;
+            echo "<div class=\"warning\">Enter password, max 40 characters</div>" ;
             
 
         }else{

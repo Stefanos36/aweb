@@ -35,8 +35,8 @@
             <div class="profile" style="display:flex">
                 <div style=" background-color:rgb(23, 30, 39); padding:15px ;border-radius:4px; font-size:larger">
                     <?php 
-                    //echo  getSessionUser();
-                    echo"David";
+                    echo  getSessionUser();
+                   
                     ?>
                 </div>
                 

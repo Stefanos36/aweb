@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <?php 
-    if(isset($_GET['blogpostname'])){ //ci dostaneme $_get z tochto?
-   echo"<title>Blog:".urldecode($_GET['blogpostname'])."</title>";
 
-}
+    if(isset($_GET['blogpostname'])){ //ci dostaneme $_get z tochto?
+        $blogpostname = $_GET['blogpostname'];
+        
+        $blogpostname =    filter_input(INPUT_GET, "blogpostname", FILTER_SANITIZE_SPECIAL_CHARS);
+     
+        echo"<title>Blog:". $blogpostname."</title>";
+
+    }
 ?>
   
    <!-- <title>Blog: </title> -->
@@ -29,13 +34,12 @@
 <body>
     <?php 
     headerdb(); 
-        if(isset($_GET['blogpostname'])){ //ci dostaneme $_get z tochto?
 
-            $blogpostname = urldecode($_GET['blogpostname']);
-        //  $blogpost= getBlogpostByblogpostname($blogpostname);
-        
-        }
-        else{
+
+        if( empty($blogpostname) ||count( overgetBlog($blogpostname)) === 0){ //ci dostaneme $_get z tochto?
+            //treba poriesit aby to dalej neslo
+           
+            
             //ak nenajde posli ho do prec
             //alebo vytvorit stranku kde je napisane ze nenaslo?
 
@@ -49,7 +53,7 @@
                                 <h2 style="text-align:center">
                                 <?php 
                                 //echo  getSessionUser();
-                                echo"Post not found 404";
+                                echo"Page not found 404";
                                 ?></h2>
                             </div>
                             
@@ -110,8 +114,17 @@
                         echo "</strong>";
                        // sizeof($comment['comment'])
                         // echo strlen($comment['comment']).": ".$comment['comment'];
+                      //  echo ""<script>alert('XSS útok!');</script>"";
+                        
+                      //TODO testujem
+                       // $test = "<script>alert('XSS útok!');</script>";
+                        //echo  "".$test."";
+                       // print_r($comment['id_comment']);
                         echo "<div class=\"word-break\" id=c".$comment['id_comment']." >";
+
                         echo $comment['comment'];
+                        
+                        //print_r($comment['comment']) ;
                         echo "</div>";
                        
                     
@@ -165,12 +178,11 @@
                     $comment = filter_input(INPUT_POST,"comment",FILTER_SANITIZE_SPECIAL_CHARS);
                     echo $comment."<br>";
 
-                    if(empty($comment) || strlen($comment)  > 25){
-                        echo "neplatne". strlen($comment)  ;
+                    if(empty($comment) || strlen($comment)  > 200){
+                        echo "TODO odkomentovat neplatne". strlen($comment)  ;
                     }else{
 
 
-                  
 
                         if(checkSession()){
 
@@ -207,10 +219,16 @@
                     }
 
                 }
+
+                //$comment = "<script>alert('XSS útok!');</script>";
+                //echo "Ošetrené: " . htmlspecialchars($comment, ENT_QUOTES, 'UTF-8') . "<br>";
+               // echo "Neošetrené: " . $comment;
             ?>
 
         </article>
        
+
+        
     </div>
 </body>
 </html>

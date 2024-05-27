@@ -3,20 +3,34 @@
 //require "connection.php";
 
 //to mu dodam , funkciou cez connection
+
+//teoreticky mozem nahadzat vsade - bo vstup uz automaticky filtrujem tymto
+//filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS)
+//htmlspecialchars($vstup, ENT_QUOTES, 'UTF-8')
+//obe pouzivaju utf-8 standart - sourse chatgpt
+function prefiltruj($vstup){
+   $vstup=  htmlspecialchars($vstup, ENT_QUOTES, 'UTF-8');
+   //znaky co boli uz raz prefiltrovane budu znova
+    $vstup= str_replace(['&amp;', '&lt;', '&gt;', '&quot;', '&#039;'], ['&', '<', '>', '"', "'"], $vstup);
+    
+  return $vstup ;
+}
+
+
 function check_login($con){
 
-    if(isset($_SESSION['user_id'])) //pozerame ci hodnota existuje
-	{
+        if(isset($_SESSION['user_id'])) //pozerame ci hodnota existuje
+        {
 
-    $id = $_SESSION['user_id'];
-    $query = "select * from users where user_id = '$id' limit 1"; //sql kod
-    $result = mysqli_query($con,$query);
-    
-    if($result && mysqli_num_rows($result) > 0)  //ci je
-    {
-        $user_data = mysqli_fetch_assoc($result);
-        return $user_data;
-    }
+        $id = $_SESSION['user_id'];
+        $query = "select * from users where user_id = '$id' limit 1"; //sql kod
+        $result = mysqli_query($con,$query);
+        
+        if($result && mysqli_num_rows($result) > 0)  //ci je
+        {
+            $user_data = mysqli_fetch_assoc($result);
+            return $user_data;
+        }
 
    }
 
@@ -27,6 +41,11 @@ function check_login($con){
    //test z dynamickeho vytvarania
 
 }
+
+
+
+
+
 
 //funkcia na dostanie vsetkych blogpostov?
 function getBlogposts(){
@@ -341,4 +360,21 @@ function zoberSol($username){
   //  print_r($data[0]['salt']);
     return $data[0]['salt']; //vrati to asi prazdne ked nebola pridana este sol?
 
+}
+
+
+function overgetBlog($getblogpost){
+    //over ci sa nachadza v databaze 
+    $mysql= dbConnect();
+    if( isset($getblogpost)){
+        $sql = $mysql->prepare("SELECT * FROM blogposts WHERE blog_name = ? "); 
+        $sql->bind_param("s",$getblogpost);    
+        $sql->execute();
+        $result= $sql->get_result();
+        $data=$result->fetch_all(MYSQLI_ASSOC);
+        //print_r($data);
+        return $data;
+    }
+
+    return false;
 }

@@ -25,7 +25,26 @@
         <!-- <div style="font-size: 20px; margin: 10px; color: white;">Signup/Registracia</div> -->
         <h2>Signup/Registracia</h2>
         <label class="text">Username</label><br>
-        <input class="text" type="text" name="username" maxlength="25" >  <br> <!-- vytvorit neskor decoy-->
+        <input class="text" type="text" name="username" maxlength="25" >  <br> 
+       
+        <!-- vytvorit neskor decoy-->
+        <div class="confirm" id="myForm">
+            <label class="text">Real name</label>
+            <input class="text" type="text" name="name"  >
+            <br>
+        </div>
+        <script>
+             window.onload = function() {
+            var honeypot = document.createElement('input');
+            honeypot.type = 'text';
+            honeypot.name = 'forename';
+            honeypot.className= 'text';
+            // honeypot.style.display = 'none';
+            document.getElementById('myForm').appendChild(honeypot);
+            }
+
+        </script>
+
         <label class="text">Password</label><br>
         <input class="text"  type="password" name="password" maxlength="40"  > <br>
         <label class="text">Repeat Password</label><br>
@@ -46,28 +65,30 @@
         $password = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS); //aby nam nepreposlali script do toho
         $password2= filter_input(INPUT_POST,"password2",FILTER_SANITIZE_SPECIAL_CHARS);
 
-       // echo"<br>".$username."<br>".$password."<br>".$password2;
-        
-        // if( isset($username)  ){
-        //     echo strlen($username);
-        //     if( $username < 26 ){
-        //      echo   "<div class=\"warning\">Username cant exceed 25 charactes</div>";
+        //honeypot
+        $name= filter_input(INPUT_POST,"name",FILTER_SANITIZE_SPECIAL_CHARS);
+        $forename = filter_input(INPUT_POST,"forename",FILTER_SANITIZE_SPECIAL_CHARS);
+        //staci vytvorit zaznam?
 
-        //     }
-        // }
+        echo"name ".$name."<br>forename ".$forename;
+       
+
+
+
+
 
         //nepusti dalej ak je viacej
         if(empty($username) || strlen($username) > 25 ){
           
-            echo "<div class=\"warning\">Zadajte username</div>" ;
+            echo "<div class=\"warning\">Enter username, max 25 characters</div>" ;
            
 
         }elseif(empty($password) || strlen($password) > 40){
-            echo "<div class=\"warning\">Zadajte heslo</div>" ;
+            echo "<div class=\"warning\">Enter password, max 40 characters</div>" ;
             
 
         }elseif(empty($password2) || !($password == $password2)){
-            echo "<div class=\"warning\">znova zadajte Repeat heslo</div>" ;
+            echo "<div class=\"warning\"> Repeat password to confirm</div>" ;
 
         }else{
             //vyplnil vsetko spravne, potrebujem overit ci v sql existuje zaznam
