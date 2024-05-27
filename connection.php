@@ -23,7 +23,7 @@ $dbConfigs = [
         'name' => 'id22129471_sadmin'
     ]
 ];
-
+//connection
 
 //mysqli_report(MYSQLI_REPORT_OFF); //TODO mozno potom lepsie vypnut pri testovani
 function dbConnect(){
