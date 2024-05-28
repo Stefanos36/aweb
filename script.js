@@ -1,10 +1,5 @@
 
-
-
-
-//zle som to zamyslel
-//dam tam username
-
+//mam tu generovanie html elementov skrz js, pretoze niektori boti nevedia citat js
 //spravit to univerzalne? asi ne
 //pre signup
 function registraionformular(){
@@ -62,5 +57,48 @@ function registraionformular(){
         }else{
             console.log("passwordlabel nexistuj")
         }
+    }
+}
+
+
+//pridam login formular
+
+
+function loginformular(){
+    window.onload = function() {
+        console.log("loginformular");
+
+        const userinput = document.createElement('input');
+        userinput.className = 'text';
+        userinput.type = 'text';
+        userinput.name = 'username';
+        userinput.maxLength = 25;
+
+        const userlabel = document.getElementById('username');
+
+    // Pridať <input> element pod <label> element
+        if (userlabel) {
+            userlabel.parentNode.insertBefore(userinput, userlabel.nextSibling);
+        }
+
+
+
+
+    }
+
+
+    const userpassword = document.createElement('input');
+    userpassword.className = 'text';
+    userpassword.type = 'password';
+    userpassword.name = 'password';
+    userpassword.maxLength = 40;
+
+    const passwordlabel = document.getElementById('password');
+
+    // Pridať <input> element pod <label> element
+    if (passwordlabel) {
+        passwordlabel.parentNode.insertBefore(userpassword, passwordlabel.nextSibling);
+    }else{
+        console.log("passwordlabel nexistuj")
     }
 }

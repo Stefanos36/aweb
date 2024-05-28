@@ -3,7 +3,7 @@
  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup/Registracia</title>
+    <title>Signup</title>
     <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="bootstrap-icons.css">
         <link rel="stylesheet" href="logincss.css">
@@ -25,30 +25,19 @@
 
     <form method="post">  <!--//preposle post metodu--> 
         <!-- <div style="font-size: 20px; margin: 10px; color: white;">Signup/Registracia</div> -->
-        <h2>Signup/Registracia</h2>
+        <h2>Signup</h2>
         <label id="username" class="text">Username</label>
-        <!-- <input class="text" type="text" name="username" maxlength="25" >    -->
-       
-        <!-- vytvorit neskor decoy ,Honeypot checkform  upravit pre testovanie, vlozit do samostatneho php subora ako funkciu
-            co bude generovat dynamicky podla stranky? - ok  
-         -->
-        <!-- <div class="checkform" >
-            <label class="text">First name</label>
-            <input class="text" type="text" name="firstname"  >
-            <label class="text">Last name</label>
-            <input class="text" type="text" name="lastname"  >
-            <br>
-        </div> -->
-       <?php
-   
+            <?php
+        
 
-        $array = array("First_name","Last_name");
-      //  print_r($params);
-//  navnada("First name", "Last name");
-      //  navnada($params);
-        navnada($array);
-    //    chytajnavnadu($params);
-       ?>
+                $array = array("First_name","Last_name");
+            
+                navnada($array);
+            
+
+
+            ?>
+       
 
         <label class="text" id="password">Password</label><br>
         <!-- <input class="text"  type="password" name="password" maxlength="40"  > <br> -->
@@ -57,7 +46,7 @@
         <!-- <input class="text" type="password" name="password2"  > <br><br> -->
         <input  class="button" id="button" type="submit" value="Signup"> <br><br>   <!--//submit spusti ten script?--> 
 
-        <a class="underline-hover" href="login.php">Click to Login/Stlac pre prihlasenie</a>
+        <a class="underline-hover" href="login.php">Click to Login</a>
     </form>
     </div>
         <script>

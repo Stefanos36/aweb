@@ -8,10 +8,11 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/Prihlasenie</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="logincss.css">
     <link rel="stylesheet" href="bootstrap-icons.css">
+    <script src="script.js"></script>
 
  </head>
  <body>
@@ -20,7 +21,7 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
    // header(""); //nerozbijem to?
     require ("connection.php");
     include ("header.php") ;
-
+    require_once ("honeypot.php");
     require_once ("sessionconfig.php");
     include("functions.php");
 
@@ -36,18 +37,26 @@ ob_start();  //magia co ma pomoct, ale aj tak nejde?
     <form method="post">
         <!-- <div style="font-size: 20px; margin: 10px; color: white;">Login/Prihlasenie</div>
         <div style="font-size: 20px; margin: 10px; color: white;">Login/Prihlasenie</div> -->
-        <h2>Login/Prihlasenie</h2>
+        <h2>Login</h2> <?php 
+            $array = array("Username","Password");
+            navnada($array);
+        ?>
         <!-- <label for="">Username</label><br> -->
-        <label class="text">Username</label><br>
-
-        <input  class="text" type="text" name="username" maxlength="25">  <br> <!-- vytvorit neskor decoy-->
-        <label class="text">Password</label><br>
-        <input  class="text" type="password" name="password" maxlength="40"> <br><br>
+        <label class="text" id="username">Username</label><br>
+       <!-- vytvorit neskor decoy-->
+        <!-- <input  class="text" type="text" name="username" maxlength="25">  <br>  -->
+        <label class="text" id="password">Password</label><br>
+        <!-- <input  class="text" type="password" name="password" maxlength="40"> <br><br> -->
         <input class="button" id="button" type="submit" value="Login"> <br><br>
 
-        <a class ="underline-hover" href="signup.php">Click to Signup/Stlac pre Registraciu</a>
+        <a class ="underline-hover" href="signup.php">Click to Signup</a>
     </form>
-    
+
+    <script> 
+     loginformular();
+        
+     </script>
+
     </div>
     
     <!-- <div class="warning">warning   </div> -->

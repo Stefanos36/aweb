@@ -20,6 +20,7 @@
     require("functions.php");
     require("sessionconfig.php");
     include("header.php");
+    require_once ("honeypot.php");
 
    if(isset($_GET['blogpostname'])){ //ci dostaneme $_get z tochto?
         $blogpostname = $_GET['blogpostname'];
@@ -93,7 +94,7 @@
             <p> <?php echo  prefiltruj( getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['blog_text']) ;?></p>
            </div>
              <div class="comments">
-                <h3>Komentáre <i class="bi bi-chat-dots"></i>
+                <h3>Comments <i class="bi bi-chat-dots"></i>
 
                 <?php 
                 echo countComment( getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'] )." </h3>";
@@ -157,17 +158,26 @@
 
                         }else{
 
-                            echo " neprihlaseny";
-                            echo " <a class=\"underline-hover\" href=\"http://localhost/aweb/login.php\">mas ucet? Prihlasit sa</a><br>  ";
+                            echo " not log in";
+                            echo " <a class=\"underline-hover\" href=\"http://localhost/aweb/login.php\">do you have account? log here</a><br>  ";
                         }
                         
                     ?>
                 
                 
-                <label for="comment">Komentár:</label><br>
+                <label for="comment">Comment:</label><br>
                 <!-- rows="4" cols="50" -->
-                <!--  -->
+                <!-- pridak honey -->
+                <?php 
+                $array=array("comment");
+                echo"count array".count($array);
+                navnada($comment);
+                
+                
+                ?>
+
                 <textarea id="comment" name="comment"  rows="3"  class="textarea "  style="width:100%" required maxlength="200"></textarea><br>
+
                 <input class="button" type="submit" value="Odoslať">
             </form>
 
