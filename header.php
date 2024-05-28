@@ -55,7 +55,8 @@ echo "
     if(checkSession()){
         echo "<div>";
        // echo "<a class=\"width padding\" href=\"login.php\" id=\"loginout\">Logout</a>";
-        echo "<button class=\"button padding\" onclick=\"odhlasma()\" >Logout</button>";
+       // echo "<button class=\"button padding\" onclick=\"odhlasma()\" >Logout</button>";
+        echo "<a class=\"width padding\" href=\"logout.php\"  >Logout</a>";
         echo "</div>";
     }else{
         echo "<div>";
@@ -90,7 +91,7 @@ echo " </div>";
         <?php 
         
         if(checkSession()){
-            echo "<a class=\"padding \" href=\"login.php\" style=\"width: 100%;\" id=\"loginout\">Logout</a>";
+            echo "<a class=\"padding \" href=\"logout.php\" style=\"width: 100%;\" >Logout</a>";
     
         }else{
             echo "<a class=\"padding \" href=\"login.php\" style=\"width: 100%;\" >Login</a>";

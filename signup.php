@@ -43,16 +43,16 @@
         <label class="text" id="password">Password</label><br>
         <!-- <input class="text"  type="password" name="password" maxlength="40"  > <br> -->
 
-        <label class="text">Repeat Password</label><br>
-        <input class="text" type="password" name="password2" > <br><br>
+        <label class="text" id="password2">Repeat Password</label><br>
+        <!-- <input class="text" type="password" name="password2"  > <br><br> -->
         <input  class="button" id="button" type="submit" value="Signup"> <br><br>   <!--//submit spusti ten script?--> 
 
         <a class="underline-hover" href="login.php">Click to Login/Stlac pre prihlasenie</a>
     </form>
     </div>
- <script>
+        <script>
            
-           // registraionformular();
+             registraionformular();
           
         </script>
 
@@ -66,20 +66,20 @@
         $password2= filter_input(INPUT_POST,"password2",FILTER_SANITIZE_SPECIAL_CHARS);
 
         //honeypot
-        $name= filter_input(INPUT_POST,"name",FILTER_SANITIZE_SPECIAL_CHARS);
-        $forename = filter_input(INPUT_POST,"forename",FILTER_SANITIZE_SPECIAL_CHARS);
+        $name= filter_input(INPUT_POST,"firstname",FILTER_SANITIZE_SPECIAL_CHARS);
+        $forename = filter_input(INPUT_POST,"lastname",FILTER_SANITIZE_SPECIAL_CHARS);
         //staci vytvorit zaznam?
 
-        echo"name ".$name."<br>forename ".$forename;
+       // echo"name ".$name."<br>forename ".$forename;
         $currentUrl = getCurrentUrl();
 
-        echo"<br>url ?".$currentUrl;
-        echo"<br>ip adresa?".getclient_ip();
+        //echo"<br>url ?".$currentUrl;
+        //echo"<br>ip adresa?".getclient_ip();
 
         //ukladat aktivitu?
 
         //Honeypot  !empty($honeypot_field)
-        echo "emptyname? ".!empty($name)."emptyforename?".!empty($forename);
+        //echo "emptyname? ".!empty($name)."emptyforename?".!empty($forename);
 
         if (!empty($name) || !empty($forename)) {
             // $bot_ip = get_client_ip();
@@ -89,15 +89,15 @@
             // // Pridanie IP adresy do blokovaného zoznamu
             // file_put_contents('blocked_ips.txt', "$bot_ip\n", FILE_APPEND);
 
-            echo "ides???????????????????";
+            //echo "ides???????????????????";
 
             //vytvorit zaznam v sql tabulke //pridat aj ostatne veci z aktivity - user a heslo
             $spravaAktivit = "activity in ".$_SERVER['REQUEST_URI']. " , honeypot formular: name:\"".$name."\",forename:\"".$forename."\"";
-            echo"<br>".$spravaAktivit."";
+           // echo"<br>".$spravaAktivit."";
             honeypot($spravaAktivit);
 
             
-           // exit('Bot detected');
+            exit();
         }
 
 

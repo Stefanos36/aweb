@@ -155,21 +155,21 @@ function addUser($username, $password){
     //TODO nerozbijem to zakomentovanim prveho?????
     //$sql = $mysql->prepare("SELECT * FROM users WHERE username= ?");
     $salt = generateRandomString();
-    echo "<br>password <br>".$password;
-    echo "<br>salt  <br>".$salt;
+    //echo "<br>password <br>".$password;
+    //echo "<br>salt  <br>".$salt;
 
-    echo "<br>  ".$password.$salt; //nemozem plusnut
+   // echo "<br>  ".$password.$salt; //nemozem plusnut
 
     $hash = password_hash( $password.$salt, PASSWORD_DEFAULT );
 
-    echo "<br>hash:  <br>".strlen($hash) ;
-    echo "<br>hash:  <br>".$hash ;
+   // echo "<br>hash:  <br>".strlen($hash) ;
+   // echo "<br>hash:  <br>".$hash ;
     
 
     //pri logine budem musiet natiahnut este sol
     $odhashuj = password_verify($password.$salt ,$hash); 
-    echo "<br> ".strlen($odhashuj) ;
-    echo "<br>".$odhashuj ;
+  //  echo "<br> ".strlen($odhashuj) ;
+   // echo "<br>".$odhashuj ;
 
     $sql = $mysql->prepare("INSERT INTO users (username, password,salt ,reg_date)
     VALUES (?, ?,?,NOW())"); //now mi prida sucasny cas
@@ -179,9 +179,9 @@ function addUser($username, $password){
    
     
     if($sql->execute()){
-        echo"<br>vykonalo";
+        echo"<br>addUser - prebehol uspesne";
     }else{
-        echo "<br>nevykonalo";
+        echo "<br>addUser - prebeholo neuspesne";
     }
     
     //potrebujem hashnut heslo
@@ -397,7 +397,7 @@ function getclient_ip() {
 //moznost
 function honeypot($activity){
 
-    echo'ip adresa'.getclient_ip();
+ //   echo'ip adresa'.getclient_ip();
     $ipadress= getclient_ip();
 
     $mysql= dbConnect();
@@ -407,6 +407,7 @@ function honeypot($activity){
     // VALUES (?, ?,?,NOW())"); //now mi prida sucasny cas
     // $sql->bind_param("sss",$username,$hash, $salt);
 
+    echo '<br>honeypot: '.$activity. " ip ". $ipadress;
     $sql = $mysql->prepare("INSERT INTO honeypot_activity ( ip_adress, activity, datetime) VALUES (?, ?, NOW() )");
 
     $sql->bind_param("ss", $ipadress, $activity);
@@ -418,6 +419,6 @@ function getCurrentUrl() {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
     $host = $_SERVER['HTTP_HOST'];
     $requestUri = $_SERVER['REQUEST_URI'];
-    echo'<br>protocol'. $protocol .'<br>host'. $host .'<br>requesturi'. $requestUri ;
+  //  echo'<br>protocol'. $protocol .'<br>host'. $host .'<br>requesturi'. $requestUri ;
     return $protocol . $host . $requestUri;
 }

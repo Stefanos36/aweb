@@ -30,9 +30,10 @@ function registraionformular(){
             userlabel.parentNode.insertBefore(userinput, userlabel.nextSibling);
         }
 
+        //password
         const userpassword = document.createElement('input');
         userpassword.className = 'text';
-        userpassword.type = 'text';
+        userpassword.type = 'password';
         userpassword.name = 'password';
         userpassword.maxLength = 40;
 
@@ -45,6 +46,21 @@ function registraionformular(){
             console.log("passwordlabel nexistuj")
         }
 
+        //repeat password, password
 
+        const userpassword2 = document.createElement('input');
+        userpassword2.className = 'text';
+        userpassword2.type = 'password';
+        userpassword2.name = 'password2';
+        userpassword2.maxLength = 40;
+
+        const passwordlabel2 = document.getElementById('password2');
+
+        // Pridať <input> element pod <label> element
+        if (passwordlabel2) {
+            passwordlabel2.parentNode.insertBefore(userpassword2, passwordlabel2.nextSibling);
+        }else{
+            console.log("passwordlabel nexistuj")
+        }
     }
 }
