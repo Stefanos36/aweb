@@ -15,6 +15,7 @@
      require ("connection.php");
      include "header.php" ;
      require_once ("sessionconfig.php");
+     require_once ("honeypot.php");
      include("functions.php");
     headerdb();
  ?>
@@ -31,14 +32,23 @@
         <!-- vytvorit neskor decoy ,Honeypot checkform  upravit pre testovanie, vlozit do samostatneho php subora ako funkciu
             co bude generovat dynamicky podla stranky? - ok  
          -->
-        <div class="checkform" id="myForm">
+        <!-- <div class="checkform" >
             <label class="text">First name</label>
             <input class="text" type="text" name="firstname"  >
             <label class="text">Last name</label>
             <input class="text" type="text" name="lastname"  >
             <br>
-        </div>
-       
+        </div> -->
+       <?php
+   
+
+        $array = array("First_name","Last_name");
+      //  print_r($params);
+//  navnada("First name", "Last name");
+      //  navnada($params);
+        navnada($array);
+    //    chytajnavnadu($params);
+       ?>
 
         <label class="text" id="password">Password</label><br>
         <!-- <input class="text"  type="password" name="password" maxlength="40"  > <br> -->
@@ -53,7 +63,7 @@
         <script>
            
              registraionformular();
-          
+
         </script>
 
 <?php 
@@ -65,41 +75,8 @@
         $password = filter_input(INPUT_POST,"password",FILTER_SANITIZE_SPECIAL_CHARS); //aby nam nepreposlali script do toho
         $password2= filter_input(INPUT_POST,"password2",FILTER_SANITIZE_SPECIAL_CHARS);
 
-        //honeypot
-        $name= filter_input(INPUT_POST,"firstname",FILTER_SANITIZE_SPECIAL_CHARS);
-        $forename = filter_input(INPUT_POST,"lastname",FILTER_SANITIZE_SPECIAL_CHARS);
-        //staci vytvorit zaznam?
-
-       // echo"name ".$name."<br>forename ".$forename;
-        $currentUrl = getCurrentUrl();
-
-        //echo"<br>url ?".$currentUrl;
-        //echo"<br>ip adresa?".getclient_ip();
-
-        //ukladat aktivitu?
-
-        //Honeypot  !empty($honeypot_field)
-        //echo "emptyname? ".!empty($name)."emptyforename?".!empty($forename);
-
-        if (!empty($name) || !empty($forename)) {
-            // $bot_ip = get_client_ip();
-            // $timestamp = date("Y-m-d H:i:s");
-            // file_put_contents('bot_log.txt', "Bot detected from IP: $bot_ip at $timestamp\n", FILE_APPEND);
-        
-            // // Pridanie IP adresy do blokovaného zoznamu
-            // file_put_contents('blocked_ips.txt', "$bot_ip\n", FILE_APPEND);
-
-            //echo "ides???????????????????";
-
-            //vytvorit zaznam v sql tabulke //pridat aj ostatne veci z aktivity - user a heslo
-            $spravaAktivit = "activity in ".$_SERVER['REQUEST_URI']. " , honeypot formular: name:\"".$name."\",forename:\"".$forename."\"";
-           // echo"<br>".$spravaAktivit."";
-            honeypot($spravaAktivit);
-
-            
-            exit();
-        }
-
+    
+   
 
 
         //nepusti dalej ak je viacej
