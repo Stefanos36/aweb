@@ -351,6 +351,10 @@ body {
 .checkform{
   display: inline;
 
+  /* TODO namiesto display none, dat daleko od obrazovky */
+  /* position: absolute;
+    left: -9999px;    */
+
 }
 
 .odsekzhora{

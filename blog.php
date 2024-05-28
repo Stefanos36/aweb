@@ -214,6 +214,8 @@
 
                             addcommentLog($comment,null , $idblog );
 
+
+                           // header("Location: ".getCurrentUrl() ); 
                             header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); 
 
                             

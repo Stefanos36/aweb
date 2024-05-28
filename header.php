@@ -59,11 +59,11 @@ echo "
         echo "</div>";
     }else{
         echo "<div>";
-        echo "<a class=\"width padding\" href=\"login.php\"  id=\"loginout\">Login</a>";
+        echo "<a class=\"width padding\" href=\"login.php\"  >Login</a>";
 
         echo "</div>";
         echo "<div>";
-        echo "<a class=\"width padding\" href=\"signup.php\"  id=\"loginout\">Signup</a>";
+        echo "<a class=\"width padding\" href=\"signup.php\" >Signup</a>";
         echo "</div>";
     }
 
@@ -93,8 +93,8 @@ echo " </div>";
             echo "<a class=\"padding \" href=\"login.php\" style=\"width: 100%;\" id=\"loginout\">Logout</a>";
     
         }else{
-            echo "<a class=\"padding \" href=\"login.php\" style=\"width: 100%;\" id=\"loginout\">Login</a>";
-            echo "<a class=\"padding \" href=\"signup.php\" style=\"width: 100%;\" id=\"loginout\">Signup</a>";
+            echo "<a class=\"padding \" href=\"login.php\" style=\"width: 100%;\" >Login</a>";
+            echo "<a class=\"padding \" href=\"signup.php\" style=\"width: 100%;\" >Signup</a>";
         }
         ?>
           

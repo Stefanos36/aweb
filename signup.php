@@ -25,23 +25,24 @@
     <form method="post">  <!--//preposle post metodu--> 
         <!-- <div style="font-size: 20px; margin: 10px; color: white;">Signup/Registracia</div> -->
         <h2>Signup/Registracia</h2>
-        <label class="text">Username</label><br>
-        <input class="text" type="text" name="username" maxlength="25" >  <br> 
+        <label id="username" class="text">Username</label>
+        <!-- <input class="text" type="text" name="username" maxlength="25" >    -->
        
-        <!-- vytvorit neskor decoy , checkform  upravit pre testovanie-->
+        <!-- vytvorit neskor decoy ,Honeypot checkform  upravit pre testovanie, vlozit do samostatneho php subora ako funkciu
+            co bude generovat dynamicky podla stranky? - ok  
+         -->
         <div class="checkform" id="myForm">
             <label class="text">First name</label>
             <input class="text" type="text" name="firstname"  >
+            <label class="text">Last name</label>
+            <input class="text" type="text" name="lastname"  >
             <br>
         </div>
-        <script>
-           
-            registraionformular();
-          
-        </script>
+       
 
-        <label class="text">Password</label><br>
-        <input class="text"  type="password" name="password" maxlength="40"  > <br>
+        <label class="text" id="password">Password</label><br>
+        <!-- <input class="text"  type="password" name="password" maxlength="40"  > <br> -->
+
         <label class="text">Repeat Password</label><br>
         <input class="text" type="password" name="password2" > <br><br>
         <input  class="button" id="button" type="submit" value="Signup"> <br><br>   <!--//submit spusti ten script?--> 
@@ -49,7 +50,11 @@
         <a class="underline-hover" href="login.php">Click to Login/Stlac pre prihlasenie</a>
     </form>
     </div>
-
+ <script>
+           
+           // registraionformular();
+          
+        </script>
 
 <?php 
 
@@ -66,9 +71,34 @@
         //staci vytvorit zaznam?
 
         echo"name ".$name."<br>forename ".$forename;
-       
+        $currentUrl = getCurrentUrl();
 
-        echo"ip adresa?".get_client_ip();
+        echo"<br>url ?".$currentUrl;
+        echo"<br>ip adresa?".getclient_ip();
+
+        //ukladat aktivitu?
+
+        //Honeypot  !empty($honeypot_field)
+        echo "emptyname? ".!empty($name)."emptyforename?".!empty($forename);
+
+        if (!empty($name) || !empty($forename)) {
+            // $bot_ip = get_client_ip();
+            // $timestamp = date("Y-m-d H:i:s");
+            // file_put_contents('bot_log.txt', "Bot detected from IP: $bot_ip at $timestamp\n", FILE_APPEND);
+        
+            // // Pridanie IP adresy do blokovaného zoznamu
+            // file_put_contents('blocked_ips.txt', "$bot_ip\n", FILE_APPEND);
+
+            echo "ides???????????????????";
+
+            //vytvorit zaznam v sql tabulke //pridat aj ostatne veci z aktivity - user a heslo
+            $spravaAktivit = "activity in ".$_SERVER['REQUEST_URI']. " , honeypot formular: name:\"".$name."\",forename:\"".$forename."\"";
+            echo"<br>".$spravaAktivit."";
+            honeypot($spravaAktivit);
+
+            
+           // exit('Bot detected');
+        }
 
 
 

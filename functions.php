@@ -381,7 +381,7 @@ function overgetBlog($getblogpost){
 
 
 
-function get_client_ip() {
+function getclient_ip() {
     $ipaddress = '';
     if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR']) {
         
@@ -392,4 +392,32 @@ function get_client_ip() {
         $ipaddress = $_SERVER['REMOTE_ADDR'];
     }
     return $ipaddress;
+}
+
+//moznost
+function honeypot($activity){
+
+    echo'ip adresa'.getclient_ip();
+    $ipadress= getclient_ip();
+
+    $mysql= dbConnect();
+    //TODO napojit na databazu
+
+    // $sql = $mysql->prepare("INSERT INTO users (username, password,salt ,reg_date)
+    // VALUES (?, ?,?,NOW())"); //now mi prida sucasny cas
+    // $sql->bind_param("sss",$username,$hash, $salt);
+
+    $sql = $mysql->prepare("INSERT INTO honeypot_activity ( ip_adress, activity, datetime) VALUES (?, ?, NOW() )");
+
+    $sql->bind_param("ss", $ipadress, $activity);
+    $sql->execute();
+
+}
+
+function getCurrentUrl() {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'];
+    $requestUri = $_SERVER['REQUEST_URI'];
+    echo'<br>protocol'. $protocol .'<br>host'. $host .'<br>requesturi'. $requestUri ;
+    return $protocol . $host . $requestUri;
 }

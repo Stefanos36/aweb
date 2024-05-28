@@ -89,7 +89,7 @@
                             addBlog($blogname,$blogtext);
                             //poslat ho na novu stranku i quess?
                             //daco ako header("Location: blog.php?blogpostname=" . $_GET['blogpostname']); 
-                        // blog.php?blogpostname=".urlencode( getBlogposts()[$i]["blog_name"])
+                            // blog.php?blogpostname=".urlencode( getBlogposts()[$i]["blog_name"])
                             
                        
                      
