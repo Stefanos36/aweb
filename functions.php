@@ -422,3 +422,38 @@ function getCurrentUrl() {
   //  echo'<br>protocol'. $protocol .'<br>host'. $host .'<br>requesturi'. $requestUri ;
     return $protocol . $host . $requestUri;
 }
+
+
+function findblogbyidreturnname($idnumber) {
+   // echo'<br>vlozene '. $idnumber.'<br>';
+    $mysql= dbConnect();
+    $sql = $mysql->prepare("SELECT blog_name FROM blogposts WHERE id_blog = ?"); 
+    $sql->bind_param("s",$idnumber);
+    $sql->execute();
+    $result= $sql->get_result();
+    $data=$result->fetch_all(MYSQLI_ASSOC);
+   // print_r($data);
+    return $data[0]['blog_name'];
+}
+
+
+//nacita komentare uzivatela
+function getprofilecomments(){
+   
+    $mysql= dbConnect();
+    //meno uzivatelo uz bolo prefiltrovane
+    //najnovsie na vrch
+    
+
+    $sql = $mysql->prepare("SELECT * FROM comments WHERE id_user = ? ORDER BY comment_date DESC"); 
+    $hodnota = 1;
+    $sql->bind_param("s",$hodnota);    
+    $sql->execute();
+    $result= $sql->get_result();
+    $data=$result->fetch_all(MYSQLI_ASSOC);
+    //return $data;
+   // print_r($data);
+
+    return ($data);
+
+}

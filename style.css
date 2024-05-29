@@ -55,6 +55,20 @@ grid-template-colums:auto ;
   text-decoration: none;
 }
 
+
+.selectcomment{
+  background-color: rgb(23, 30, 39);
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: larger;
+  border-radius: 5px ;
+}
+
+.selectcomment:hover{
+  background-color: dodgerblue;
+
+}
+
 .profile{
   border-radius: 10px ;
   background-color: #0b415a;

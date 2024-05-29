@@ -24,6 +24,7 @@ session_start();
 
 //Problem so session?
 //&& !empty($_SESSION['last_regeneration'])
+//asi zbytocne ?
 if (isset($_SESSION['last_regeneration']  )  ||empty($_SESSION['last_regeneration']) ){
     session_regenerate_id(true);
     $_SESSION['last_regeneration'] = time();

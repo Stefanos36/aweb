@@ -41,7 +41,7 @@
                 </div>
                 
                 <div style="margin-left:auto; align-content:center">
-                    <a class="button" href="">Profile</a>
+                    <a class="button" href="profile.php">Profile</a>
                     <a class="button" href="newpost.php">new Post</a>
                 </div>
                 
