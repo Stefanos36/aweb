@@ -165,18 +165,18 @@
                     ?>
                 
                 
-                <label for="comment">Comment:</label><br>
+                <label for="comment" id="comment">Comment:</label><br>
                 <!-- rows="4" cols="50" -->
                 <!-- pridak honey -->
                 <?php 
-                $array=array("comment");
-                echo"count array".count($array);
-                navnada($comment);
+                $array="comment2";
+               // echo"count array";
+                navnada($array);
                 
                 
                 ?>
 
-                <textarea id="comment" name="comment"  rows="3"  class="textarea "  style="width:100%" required maxlength="200"></textarea><br>
+                <textarea name="comment"  rows="3"  class="textarea "  style="width:100%" required maxlength="200"></textarea><br>
 
                 <input class="button" type="submit" value="Odoslať">
             </form>

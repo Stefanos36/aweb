@@ -102,3 +102,10 @@ function loginformular(){
         console.log("passwordlabel nexistuj")
     }
 }
+
+
+function commentelement(){
+
+
+
+}

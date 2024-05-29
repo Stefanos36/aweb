@@ -30,7 +30,7 @@ function prihlasenie(){
 function navnada($vstup){
     $spravaAktivit = "activity in ".$_SERVER['REQUEST_URI']. " , honeypot formular:";
 
-    if( count($vstup)==1){
+    if(  !is_array( $vstup )  ){
         ?>
         <div class="checkform" >
             <label class="text specialinput"><?php echo $vstup; ?></label>
@@ -44,28 +44,25 @@ function navnada($vstup){
 
         $preposlat =false;
                 if($_SERVER['REQUEST_METHOD'] == "POST") 
-                    {    $preposlat =false;
+                    {    //$preposlat =false;
 
                         $filtrovane= filter_input(INPUT_POST, $vstup ,FILTER_SANITIZE_SPECIAL_CHARS);
                      // $forename = filter_input(INPUT_POST,"lastname",FILTER_SANITIZE_SPECIAL_CHARS);
             
                     if (!empty($filtrovane)) {
-                    
+                 //   echo"je prazdny? ".$filtrovane."";
                     //  $spravaAktivit = "activity in ".$_SERVER['REQUEST_URI']. " , honeypot formular: name:\" ".$name."\", forename:\" ".$forename."\"";
                         $spravaAktivit = $spravaAktivit.", ".$vstup.": \"".$filtrovane."\"";
                         // echo"<br>".$spravaAktivit."";
-                        $preposlat = true;
+                      //  $preposlat = true;
             
+                            honeypot($spravaAktivit);
+                            die(); //aby ukoncil dalsiu aktivitu
                         
                     // exit();
-                    }else{
-                       // echo"prazdne?";
                     }
                 }
-                if($preposlat){
-                honeypot($spravaAktivit);
-            die(); //aby ukoncil dalsiu aktivitu
-                }
+                
     }
     else{
         foreach($vstup as $udaj){
