@@ -41,7 +41,7 @@
                 </div>
                 
                 <div style="margin-left:auto; align-content:center">
-                    <a class="button" href="profile.php">Profile</a>
+                    <a class="button" href="profile.php?profilename=<?php echo prefiltruj (getSessionUser()); ?> ">Profile</a>
                     <a class="button" href="newpost.php">new Post</a>
                 </div>
                 
@@ -71,7 +71,7 @@
         <div class="blog">
         <div class="blogobsah">
         <div style="display:flex; ">
-<div>
+        <div>
         <h2>
 
        <?php
