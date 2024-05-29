@@ -98,14 +98,30 @@ function loginformular(){
     // Pridať <input> element pod <label> element
     if (passwordlabel) {
         passwordlabel.parentNode.insertBefore(userpassword, passwordlabel.nextSibling);
-    }else{
-        console.log("passwordlabel nexistuj")
     }
 }
 
 
 function commentelement(){
+    window.onload = function() {
+        // userpassword
+        const commetninput = document.createElement('textarea');
+        commetninput.className = 'textarea';
+        //userpassword.type = 'password';
+        commetninput.name = 'comment';
+        commetninput.maxLength = 200;
+        commetninput.rows=3;
+        commetninput.style="width:100%";
 
+        const commentlabel = document.getElementById('comment');
 
+        // Pridať <input> element pod <label> element
+        if (commentlabel) {
+            // document.createElement("br");
+            commentlabel.parentNode.insertBefore(commetninput, commentlabel.nextSibling);
+            commentlabel.parentNode.insertBefore(document.createElement("br"), commentlabel.nextSibling);
+            
+        }
 
+    }
 }

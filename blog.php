@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
 
 <?php 
 
@@ -168,6 +169,8 @@
                 <label for="comment" id="comment">Comment:</label><br>
                 <!-- rows="4" cols="50" -->
                 <!-- pridak honey -->
+                
+                <!-- <textarea name="comment"  rows="3"  class="textarea "  style="width:100%" maxlength="200"></textarea><br> -->
                 <?php 
                 $array="comment2";
                // echo"count array";
@@ -176,8 +179,7 @@
                 
                 ?>
 
-                <textarea name="comment"  rows="3"  class="textarea "  style="width:100%" required maxlength="200"></textarea><br>
-
+                <script> commentelement();</script>
                 <input class="button" type="submit" value="Odoslať">
             </form>
 
@@ -190,7 +192,7 @@
                   //  echo $comment."<br>";
 
                     if(empty($comment) || strlen($comment)  > 200){
-                        echo "TODO odkomentovat neplatne". strlen($comment)  ;
+                       // echo "TODO odkomentovat neplatne". strlen($comment)  ;
 
                     }else{
 

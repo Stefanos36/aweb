@@ -31,7 +31,7 @@
 
                             <!--  required -->
                             Title:
-                            <input style="margin-left: auto; font-weight:bold; " type="text" name="blog_name">
+                            <input style="margin-left: auto; font-size:25px; width: 75%; " type="text" name="blog_name">
                         </div>
                         <br>
 
@@ -47,14 +47,14 @@
                         
                         <input class="button" type="submit" value="odoslat">
 
-                        <div id="" style="color:red"> color test</div>
+                       
                     </form>
                 </div>
             </div>
         </div>  
             
         <?php 
-        echo  "<br>random string ".generateRandomString();
+        
         
     
 
