@@ -76,6 +76,7 @@
         <article>
             <!-- nacitavanie nazvu -->
             <div class="blogobsah" >
+                
 
                 <div style="display: flex"> 
 
@@ -95,59 +96,111 @@
             <p> <?php echo  prefiltruj( getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['blog_text']) ;?></p>
            </div>
              <div class="comments">
+             <!-- <a href=""  class="changea" style="color: unset;"> -->
                 <h3>Comments <i class="bi bi-chat-dots"></i>
 
                 <?php 
                 echo countComment( getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'] )." </h3>";
                     for($i= 0;$i<count( getComments(getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog']));$i++){
-                        echo" <div class=\"comment\" >";
-                        
-                        echo "<strong>";
-                        $comment =  getComments(getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'])[$i];
-                        if(empty($comment['id_user'])){
-                            echo"Anon";
-                        }else{
-                            $userID = $comment['id_user'];
-                            echo"<div class=\"bi bi-book-half\" > ";
-                            //echo getComments(getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'])[$i]['id_user'];
-                           // echo $userID."  ";
-                            print_r(  prefiltruj(getUserbyId($userID)[0]["username"]));
-                            echo "</div>";
-                        }
-                        echo "</strong>";
-                       // sizeof($comment['comment'])
-                        // echo strlen($comment['comment']).": ".$comment['comment'];
-                      //  echo ""<script>alert('XSS útok!');</script>"";
-                        
-                      //TODO testujem
-                       // $test = "<script>alert('XSS útok!');</script>";
-                        //echo  "".$test."";
-                       // print_r($comment['id_comment']);
-                        echo "<div class=\"word-break\" id=c".$comment['id_comment']." >";
+                         $comment =  getComments(getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'])[$i];
 
-                        echo  prefiltruj($comment['comment']);
+                         
+                        ?>
                         
-                        //print_r($comment['comment']) ;
-                        echo "</div>";
+                        <?php
+
+
+                       // echo "<strong>";
                        
-                    
-                        echo "<div class=\"subforum-info subforum-column\">";
-                        echo "<small> <i class=\"bi bi-clock\"></i>
-                        ";
-                        echo  date( "H:i d.m.Y",  prefiltruj(strtotime( $comment['comment_date'] ) )) ;
-                        echo "</small>";
+                        if(empty($comment['id_user'])){
+                            ?> 
+                            
+                            <div class="comment" >
+                            <?php
+                               echo "<strong>";
+                                echo"Anon";
 
-                        echo" </div>";
-                        echo" </div>";
+                                echo "</strong>";
+                            
+                             echo "<div class=\"word-break\" id=c".$comment['id_comment']." >";
+     
+                             echo  prefiltruj($comment['comment']);
+                             
+                             
+                             echo "</div>";
+                            
+                         
+                             echo "<div class=\"subforum-info subforum-column\">";
+                             echo "<small> <i class=\"bi bi-clock\"></i>";
+                             echo  date( "H:i d.m.Y",  prefiltruj(strtotime( $comment['comment_date'] ) )) ;
+                             echo "</small>";
+     
+                             echo" </div>";
+                            ?> 
+                            </div>
+                            <?php
+
+
+                        }else{
+                             $userID = $comment['id_user'];
+                            ?>
+                             <a href="profile.php?profilename=<?php echo prefiltruj(getUserbyId($userID)[0]["username"]); ?> "   class="changea" style="color: unset;">
+                            <div class="selectcomment">
+                            <?php
+                                echo "<strong>";
+                                
+                                echo"<div class=\"bi bi-book-half\" > ";
+                                //echo getComments(getBlogpostByblogpostname($GLOBALS ['blogpostname'])[0]['id_blog'])[$i]['id_user'];
+                                // echo $userID."  ";
+                                // print_r(  prefiltruj(getUserbyId($userID)[0]["username"]));
+                                echo  prefiltruj(getUserbyId($userID)[0]["username"]);
+                                echo "</div>";
+
+
+
+                                echo "</strong>";
+                                // sizeof($comment['comment'])
+                                // echo strlen($comment['comment']).": ".$comment['comment'];
+                                //  echo ""<script>alert('XSS útok!');</script>"";
+                                
+                                //TODO testujem
+                                // $test = "<script>alert('XSS útok!');</script>";
+                                //echo  "".$test."";
+                                // print_r($comment['id_comment']);
+                                echo "<div class=\"word-break\" id=c".$comment['id_comment']." >";
+        
+                                echo  prefiltruj($comment['comment']);
+                                
+                                //print_r($comment['comment']) ;
+                                echo "</div>";
+                                
+                            
+                                echo "<div class=\"subforum-info subforum-column\">";
+                                echo "<small> <i class=\"bi bi-clock\"></i>
+                                ";
+                                echo  date( "H:i d.m.Y",  prefiltruj(strtotime( $comment['comment_date'] ) )) ;
+                                echo "</small>";
+        
+                                echo" </div>";
+
+
+                             ?>
+                             
+                             
+                             </div>
+                            </a> 
+                             <?php
+                        }
+                               
+                    
+                        
 
                     }
-
                 
                 ?>
-
-                
+  
             </div>
-                    <!-- prisposobyt tomu ci je prihlaseny? -->
+              
             
             <form action="#" method="POST" id="commentForm" class="text">
                     <?php 

@@ -12,12 +12,21 @@ echo" <div class=\"header\">
     <div class=\"textS\" >";
 echo nazovServera()." <br>"; 
 
-    if(checkSession()){
-        echo "Prihlaseny: ". getSessionUser();
-    }
-    else{
-        echo "Neprihlaseny";
-    }
+    // if(checkSession()){
+    //     echo "Prihlaseny: ". getSessionUser();
+    // }
+    // else{
+    //     echo "Neprihlaseny";
+    // }
+        ?> 
+        <div style="display: flex;">
+            <i class="bi bi-clock">
+            </i>
+                <div id="clock"></div>
+            </div>
+            <script src="clock.js"></script>
+    <?php
+    
 echo "
 
 </div>

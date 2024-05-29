@@ -42,6 +42,19 @@ function check_login($con){
 
 }
 
+// (function () {
+
+//     var clockElement = document.getElementById( "clock" );
+  
+//     function updateClock ( clock ) {
+//       clock.innerHTML = new Date().toLocaleTimeString();
+//     }
+  
+//     setInterval(function () {
+//         updateClock( clockElement );
+//     }, 1000);
+  
+//   }());
 
 
 
@@ -438,7 +451,7 @@ function findblogbyidreturnname($idnumber) {
 
 
 //nacita komentare uzivatela
-function getprofilecomments(){
+function getprofilecomments($iduser){
    
     $mysql= dbConnect();
     //meno uzivatelo uz bolo prefiltrovane
@@ -446,8 +459,8 @@ function getprofilecomments(){
     
 
     $sql = $mysql->prepare("SELECT * FROM comments WHERE id_user = ? ORDER BY comment_date DESC"); 
-    $hodnota = 1;
-    $sql->bind_param("s",$hodnota);    
+   
+    $sql->bind_param("s",$iduser);    
     $sql->execute();
     $result= $sql->get_result();
     $data=$result->fetch_all(MYSQLI_ASSOC);

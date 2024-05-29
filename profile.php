@@ -10,6 +10,17 @@ require("sessionconfig.php");
 include("header.php");
 headerdb();
 
+    //budem musiet pridat
+   if(isset($_GET['profilename'])){ //ci dostaneme $_get z tochto?
+        $profilename = $_GET['profilename'];
+        
+        $profilename =    filter_input(INPUT_GET, "profilename", FILTER_SANITIZE_SPECIAL_CHARS);
+     
+        echo"<title>Profile:".  prefiltruj( $profilename)."</title>";
+
+    }
+
+
 //budem musiet zamietnut pristup ked nebude prihlaseny
 ?>
 
@@ -19,18 +30,63 @@ headerdb();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile: David <?php echo getSessionUser(); ?> </title>
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bootstrap-icons.css">
     <script src="odhlasenie.js"></script>
 </head>
 <body>
-    <?php //echo getSessionUser(); ?>
+    <?php //echo getSessionUser();
+          if( empty($profilename)|| count (getUserbyName($profilename))===0 ){ //ci dostaneme $_get z tochto?
+            //treba poriesit aby to dalej neslo
+           
+            
+            //ak nenajde posli ho do prec
+            //alebo vytvorit stranku kde je napisane ze nenaslo?
+
+            $profilename = false;
+          
+            ?>
+             <div class="marginbasic" style="margin-top:20%">
+            <div class="changea">
+                        <div class="profile" style="display:grid">
+                            <div style=" background-color:rgb(23, 30, 39); padding:15px ;border-radius:4px; font-size:larger">
+                                <h2 style="text-align:center">
+                                <?php 
+                                //echo  getSessionUser();
+                                echo"Page not found 404";
+                                ?></h2>
+                            </div>
+                            
+                            
+                            
+                        </div>  
+                    </div>
+                </div>
+            <?php
+
+            //header("Location: index.php");
+            die;
+        }
+    
+    
+    
+    ?>
     <!-- daco podobne ako comentarova sekcia ale len pre dany profil -->
+
     <div class="blogpost">
         <div class="blogobsah">
-            <h2>David</h2>
-            <p>account created: xyz</p>
+            <!-- <h2>David </h2> -->
+            <h2> <?php echo $profilename; ?> </h2>
+            
+
+            <p>account created: 
+
+            <?php 
+             
+              print_r(  getUserbyName($profilename)[0]['reg_date']);
+            ?>
+            </p>
             <!-- <label for="">account created: xyz</label> -->
 
     
@@ -40,7 +96,7 @@ headerdb();
 
         <div class="comments">
             <h3>Posted Comments</h3>
-
+            <!-- vzor -->
             <!-- <div class="comment">
 
                 <strong>Nazov blogu</strong>
@@ -53,8 +109,6 @@ headerdb();
                     12:54 21.05.2024
                 </small>
             </div>
-
-
 
              <div class="comment">
 
@@ -70,7 +124,7 @@ headerdb();
             </div> -->
         <?php 
 
-           $data= getprofilecomments();
+           $data= getprofilecomments(getUserbyName($profilename)[0]['id']);
           // $pocitadlo = 0;
            foreach($data as $comment){
 
@@ -106,5 +160,6 @@ headerdb();
            ?>
     </div>
     </div>
+    <div style="padding:80px"><br></div>
 </body>
 </html>
