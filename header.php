@@ -22,7 +22,7 @@ echo nazovServera()." <br>";
         <div style="display: flex;">
             <i class="bi bi-clock">
             </i>
-                <div id="clock"></div>
+                <div id="clock" style="font-family: sans-serif;"></div>
             </div>
             <script src="clock.js"></script>
     <?php
