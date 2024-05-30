@@ -29,8 +29,11 @@ headerdb();
             <br>
             
             <h2>Funkcionality</h2>
+           
             <p>Cieľom bolo vytvoriť stránku s honeypot-om. Honeypot je zaznamenávací systém na nekalú aktivitu.
-                V tomto projekte je implementovaný skritými vyplňovacími dotazníkmi. Zaznamenával sa na ňom rozkliknutá url, zadaný vstup, čas vytvorenia, ip adresa.<br><br>
+                V tomto projekte je implementovaný skritými vyplňovacími dotazníkmi. Zaznamenával sa na ňom rozkliknutá url, zadaný vstup, čas vytvorenia, ip adresa.
+               <br ><br> <a href="honeypotlog.php" class="button">honeypot log</a>
+                <br><br>
                 Stránka dostala podobu diskusného fóra, kde užívatelia môžu spolu komunikovať. Fóra sú vytvárané dynamicky - údaje sú načítané z 
                 sql databázy. Parameter podľa ktorého sa určí ktoré fórum sa vyberá je pomocou vytvoreného get request-u.  
                 <br><br>Bol vytvorený vlastný systém pre registráciu užívateľov. Používal sa princíp hashovania hesiel zo soľou. 

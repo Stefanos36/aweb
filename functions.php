@@ -470,3 +470,13 @@ function getprofilecomments($iduser){
     return ($data);
 
 }
+
+function honeypotlog(){
+    $mysql= dbConnect();
+    $sql = $mysql->prepare("SELECT * FROM honeypot_activity");
+    $sql->execute();
+    $result= $sql->get_result();
+    $data=$result->fetch_all(MYSQLI_ASSOC);
+    return ($data);
+
+}
