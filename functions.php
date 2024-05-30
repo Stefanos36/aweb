@@ -68,7 +68,7 @@ function getBlogposts(){
         die("");
     }
     //zevraj toto ochranuje aj voci injection, idk
-    $result = $mysql->query("SELECT * FROM blogposts"); 
+    $result = $mysql->query("SELECT * FROM blogposts ORDER BY blog_date DESC" ); 
     
     $data=$result->fetch_all(MYSQLI_ASSOC);
 

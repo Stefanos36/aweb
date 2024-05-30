@@ -50,7 +50,7 @@ echo "
     <div class="displayFlex">
         <div class="">
             <a  class="padding width" href="index.php">Home</a></div>
-    <div><a  class="padding width " href="#">info</a></div>
+    <div><a  class="padding width " href="info.php">info</a></div>
     
 
 
@@ -95,7 +95,7 @@ echo " </div>";
     
       <li ><a class="padding " style="width: 100%;" href="index.php">Home</a></li>
       <li class="dropdown">
-        <li><a class="padding " style="width: 100%;" href="#">info</a></li>
+        <li><a class="padding " style="width: 100%;" href="info.php">info</a></li>
 
         <?php 
         

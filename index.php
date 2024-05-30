@@ -98,7 +98,15 @@
         echo  "</div>";
         echo  "</div>";
         echo  "</div>";
+        ?>  
+
+        <p>
+        <?php
         echo"".prefiltruj( getBlogposts()[$i]["blog_text"]) ."<br>";
+        ?>  
+
+       </p>
+        <?php
         echo "</div>";
         echo"</div>";
         echo "</a>"; //posle nam do url data
